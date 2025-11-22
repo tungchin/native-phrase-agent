@@ -1,0 +1,48 @@
+# Environment & secrets
+.env
+.env.*
+*.env
+
+# Virtual environment
+.venv/
+venv/
+.venv/*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Project data and credentials
+memory_bank.json
+credentials.json
+secrets.json
+*.key
+*.pem
+*.crt
+*.p12
+
+# Editor / OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Databases
+*.sqlite3
+*.db
+
+# Build/dist
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Ignore any large binary artifacts accidentally added
+*.zip
+*.tar.gz
+*.tgz
+
+# Node modules (if any)
+node_modules/
