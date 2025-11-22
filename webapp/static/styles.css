@@ -1,0 +1,8 @@
+body{font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#f6f8fa; color:#111;}
+.container{max-width:800px;margin:24px auto;padding:16px}
+.card{background:white;padding:12px;border-radius:8px;margin-top:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+textarea{width:100%;}
+button{padding:8px 12px;border-radius:6px;background:#0366d6;color:white;border:none}
+pre{background:#f1f8ff;padding:8px;border-radius:6px}
+.output-box{background:#fff; border:1px solid #e6eef8; padding:12px; border-radius:6px; height:260px; overflow:auto; white-space:pre-wrap}
+.output-box strong{font-weight:700}

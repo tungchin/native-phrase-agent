@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review - Native Phrase Navigator</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Review</h1>
+    <nav>
+      <a href="/">Home</a> | <a href="/review">Review</a> | <a href="/quizpage">Quiz</a>
+    </nav>
+
+    <div class="card">
+      <input id="search" placeholder="Search phrase...">
+      <button id="search-btn">Search</button>
+      <div id="results"></div>
+    </div>
+
+  </div>
+  <script>
+    function makeItemHtml(it, idx){
+      const examplesHtml = (it.examples || []).map(e => `<div class="example">${e}</div>`).join('');
+      const lessonHtml = it.lesson_html || '';
+      return `
+        <div class="review-item">
+          <div class="review-header"><span class="index">${idx + 1}.</span> <strong class="phrase">${it.phrase || ''}</strong></div>
+          <div class="review-body">
+            <p><strong>Definition:</strong> ${it.definition || it.meaning || ''}</p>
+            <p><strong>Examples:</strong><br>${examplesHtml}</p>
+            <details>
+              <summary>Full lesson</summary>
+              <div class="lesson-html">${lessonHtml}</div>
+            </details>
+          </div>
+        </div>
+        <hr>
+      `;
+    }
+
+    async function renderItems(items) {
+      const results = document.getElementById('results');
+      results.innerHTML = '';
+      if (!items || items.length === 0) { results.textContent = 'No results.'; return; }
+      items.forEach((it, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = makeItemHtml(it, idx);
+        results.appendChild(wrapper);
+      });
+    }
+
+    document.getElementById('search-btn').addEventListener('click', async () => {
+      const q = document.getElementById('search').value.trim();
+      const url = q ? ('/review_search?q=' + encodeURIComponent(q)) : '/review_list';
+      const resp = await fetch(url);
+      const items = await resp.json();
+      const list = Array.isArray(items) ? items : (items.results || items);
+      renderItems(list);
+    });
+
+    // Load full list on page load
+    (async function(){
+      try {
+        const resp = await fetch('/review_list');
+        const items = await resp.json();
+        const list = Array.isArray(items) ? items : (items.results || items);
+        renderItems(list);
+      } catch (e) {
+        document.getElementById('results').textContent = 'Failed to load review list.';
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Native Phrase Navigator</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Native Phrase Navigator</h1>
+    <nav>
+      <a href="/">Home</a> | <a href="/review">Review</a> | <a href="/quizpage">Quiz</a>
+    </nav>
+    <p>You've learned <span id="memory-count">{{ memory_count }}</span> phrases.</p>
+
+    <div class="card">
+      <h2>Submit your sentence</h2>
+      <textarea id="sentence" rows="3" placeholder="Type a sentence...">Yesterday I was very tired after my work, so I slept immediately.</textarea>
+      <button id="submit">Submit</button>
+      <div id="corrector-output" class="output-box">&nbsp;</div>
+    </div>
+
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
